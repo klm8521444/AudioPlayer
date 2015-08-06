@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="C:\AndroidStudioProjects\P21405MusicPlayer\app\build\intermediates\exploded-aar\net.rdrei.android.dirchooser\library\2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="80f7977c9545ad0472210159da0878eda4ecb283">
+        <dex dex="C:\AndroidStudioProjects\P21405MusicPlayer\app\build\intermediates\pre-dexed\debug\classes-47fc4bb24ac68ae4b73f30837e49e3828b5cdec1.jar" />
+    </item>
+    <item
+        jar="C:\AndroidStudioProjects\P21405MusicPlayerF\app\build\intermediates\exploded-aar\net.rdrei.android.dirchooser\library\2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="80f7977c9545ad0472210159da0878eda4ecb283">
+        <dex dex="C:\AndroidStudioProjects\P21405MusicPlayerF\app\build\intermediates\pre-dexed\debug\classes-b2bcb268f476be5653626b9fdbb21783f1efef72.jar" />
+    </item>
+    <item
+        jar="C:\AndroidStudioProjects\P21405MusicPlayerF\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="f8efd0096475e0daf054267b61544e10dc776503">
+        <dex dex="C:\AndroidStudioProjects\P21405MusicPlayerF\app\build\intermediates\pre-dexed\debug\classes-876844754119aec70269922ca858f2e90e6fb565.jar" />
+    </item>
+    <item
+        jar="D:\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.2.1\support-annotations-22.2.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="61a0ff5c29295ec56d7e0bd3d25d95dbf71b4b2b">
+        <dex dex="C:\AndroidStudioProjects\P21403MusicPlayer\app\build\intermediates\pre-dexed\debug\support-annotations-22.2.1-db1bb2a3f1608a31c38a2d1f5698fe71cc45038a.jar" />
+    </item>
+    <item
+        jar="C:\AndroidStudioProjects\P21403MusicPlayer\app\build\intermediates\exploded-aar\net.rdrei.android.dirchooser\library\2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="80f7977c9545ad0472210159da0878eda4ecb283">
+        <dex dex="C:\AndroidStudioProjects\P21403MusicPlayer\app\build\intermediates\pre-dexed\debug\classes-03d18d5bc0563ca2d04c5cd649a8312015de9cb5.jar" />
+    </item>
+    <item
+        jar="C:\AndroidStudioProjects\P21405MusicPlayerF\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="4486e953d1f35f8ccab098b1dd67146366d5f731">
+        <dex dex="C:\AndroidStudioProjects\P21405MusicPlayerF\app\build\intermediates\pre-dexed\debug\classes-54a9843ce60c176b9e9e4ca11541c3f69e484292.jar" />
+    </item>
+    <item
+        jar="C:\AndroidStudioProjects\P21405MusicPlayer\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\22.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="3abb4b88f5a8a0584a9b01d3170d7165f12f8588">
+        <dex dex="C:\AndroidStudioProjects\P21405MusicPlayer\app\build\intermediates\pre-dexed\debug\classes-76384f47680f0e928df8e55fa2081fd73666e3a8.jar" />
+    </item>
+    <item
+        jar="C:\AndroidStudioProjects\P21403MusicPlayer\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\22.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="3abb4b88f5a8a0584a9b01d3170d7165f12f8588">
+        <dex dex="C:\AndroidStudioProjects\P21403MusicPlayer\app\build\intermediates\pre-dexed\debug\classes-d8cf842f8db1e0f31079e291e412617ebc3b0f12.jar" />
+    </item>
+    <item
+        jar="C:\AndroidStudioProjects\P21403MusicPlayer\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="f8efd0096475e0daf054267b61544e10dc776503">
+        <dex dex="C:\AndroidStudioProjects\P21403MusicPlayer\app\build\intermediates\pre-dexed\debug\classes-ff7c48ba53841c1436ec63e07da579d01e183ac6.jar" />
+    </item>
+    <item
+        jar="C:\AndroidStudioProjects\P21405MusicPlayer\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="f8efd0096475e0daf054267b61544e10dc776503">
+        <dex dex="C:\AndroidStudioProjects\P21405MusicPlayer\app\build\intermediates\pre-dexed\debug\classes-722dd0840275f1d68f97d560a9c29ef9b8681de4.jar" />
+    </item>
+    <item
+        jar="C:\AndroidStudioProjects\P21405MusicPlayerF\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\jars\libs\internal_impl-22.2.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="c471eaaba13ff64f6e0383d1c30a9cdc9a97efeb">
+        <dex dex="C:\AndroidStudioProjects\P21405MusicPlayerF\app\build\intermediates\pre-dexed\debug\internal_impl-22.2.1-38bb6a40da63685268bcf8f4fb0164ac42d798fc.jar" />
+    </item>
+    <item
+        jar="C:\AndroidStudioProjects\P21403MusicPlayer\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\jars\libs\internal_impl-22.2.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="c471eaaba13ff64f6e0383d1c30a9cdc9a97efeb">
+        <dex dex="C:\AndroidStudioProjects\P21403MusicPlayer\app\build\intermediates\pre-dexed\debug\internal_impl-22.2.1-9ca8bea18f938776ffed683f2e1a6d8e69690a02.jar" />
+    </item>
+    <item
+        jar="C:\AndroidStudioProjects\P21405MusicPlayerF\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\22.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="3abb4b88f5a8a0584a9b01d3170d7165f12f8588">
+        <dex dex="C:\AndroidStudioProjects\P21405MusicPlayerF\app\build\intermediates\pre-dexed\debug\classes-bdf5dfd0103edd6fc36d0da0f503d7596f4dd998.jar" />
+    </item>
+    <item
+        jar="C:\AndroidStudioProjects\P21403MusicPlayer\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="4486e953d1f35f8ccab098b1dd67146366d5f731">
+        <dex dex="C:\AndroidStudioProjects\P21403MusicPlayer\app\build\intermediates\pre-dexed\debug\classes-0b64d47d536f35924193ed24276a0bc611ca7be8.jar" />
+    </item>
+    <item
+        jar="C:\AndroidStudioProjects\P21405MusicPlayer\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\jars\libs\internal_impl-22.2.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="c471eaaba13ff64f6e0383d1c30a9cdc9a97efeb">
+        <dex dex="C:\AndroidStudioProjects\P21405MusicPlayer\app\build\intermediates\pre-dexed\debug\internal_impl-22.2.1-962ecb6f30063061c39001f02ea11ce7096cdc00.jar" />
+    </item>
+    <item
+        jar="C:\AndroidStudioProjects\P21405MusicPlayer\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="4486e953d1f35f8ccab098b1dd67146366d5f731">
+        <dex dex="C:\AndroidStudioProjects\P21405MusicPlayer\app\build\intermediates\pre-dexed\debug\classes-7b8870a0b860ae2a489ee74a3c7f8fc054118fe4.jar" />
+    </item>
+
+</items>
