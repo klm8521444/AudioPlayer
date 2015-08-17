@@ -32,19 +32,10 @@ public class PlaylistActivity extends BaseActivity implements Runnable, View.OnC
     final String LOG_TAG = "myLogs";
 
     private RecyclerView recyclerView;
-    //private ArrayList<Song> playlist;
-    //private ArrayList<Song> filteredPlaylist;
-    //public MediaPlayer mediaPlayer;
     private SeekBar seekbar;
-    //private String currentText = "";
-    //private Song previousSong;
 
     private Handler durationHandler = new Handler();
     private double timeElapsed = 0, finalTime = 0;
-
-
-    //private int position = 0;
-    //private int listLength = 0;
 
     TextView songName, author, album, duration, passTime;
 
@@ -115,17 +106,8 @@ public class PlaylistActivity extends BaseActivity implements Runnable, View.OnC
             bindService(intent, sConn, 0);
         }
 
-        /*
-        playlist = new ArrayList<>();
-        filteredPlaylist = new ArrayList<>();
-        mediaPlayer = new MediaPlayer();
-        */
-
-
         Log.d(LOG_TAG, "PlaylistActivity onCreate 2");
-
-
-
+        
     }
 
 
