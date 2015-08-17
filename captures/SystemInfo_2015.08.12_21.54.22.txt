@@ -1,0 +1,204 @@
+Applications Memory Usage (kB):
+Uptime: 115557605 Realtime: 304135331
+
+Total PSS by process:
+    43402 kB: system (pid 27410)
+    43150 kB: android.process.acore (pid 27898 / activities)
+    41198 kB: com.skype.raider (pid 7904 / activities)
+    30996 kB: com.android.settings (pid 8469 / activities)
+    30270 kB: com.google.android.gms.persistent (pid 27628)
+    28230 kB: com.lenovo.ideafriend (pid 27858 / activities)
+    22439 kB: com.android.systemui (pid 27533)
+    17040 kB: com.google.process.gapps (pid 27712)
+    17033 kB: com.google.android.gms (pid 9507)
+    16327 kB: com.android.incallui (pid 27884 / activities)
+    15512 kB: com.android.phone (pid 27693 / activities)
+    14763 kB: android.process.acore (pid 27872)
+    14741 kB: com.android.deskclock (pid 9751)
+    14500 kB: com.viber.voip (pid 6420)
+    13333 kB: com.google.android.inputmethod.latin (pid 27614)
+    12007 kB: com.lenovo.wifiswitch (pid 27820)
+    11545 kB: com.lenovo.lewea (pid 5121)
+    10207 kB: com.android.keyguard (pid 27500)
+    10111 kB: com.lenovo.powercenter (pid 28069 / activities)
+     9638 kB: com.google.android.gms.wearable (pid 9572)
+     8225 kB: com.lenovo.calendar (pid 29922)
+     5111 kB: com.lenovo.lightsettings (pid 27794)
+     5047 kB: com.nqmobile.avlenovo (pid 21162)
+     4556 kB: com.lenovo.widetouch (pid 27806)
+     4300 kB: com.google.process.location (pid 28043)
+     4255 kB: com.lenovo.safecenter.whitelist (pid 28116)
+     3881 kB: com.lenovo.weatherserver (pid 27846)
+     3447 kB: com.mediatek.voicecommand (pid 27780)
+     3411 kB: vocalizer_e.tts (pid 29034)
+     3401 kB: com.lenovo.smartrotation (pid 27832)
+     1853 kB: zygote (pid 27032)
+     1583 kB: logcat (pid 7848)
+     1151 kB: logcat (pid 7796)
+     1017 kB: surfaceflinger (pid 27031)
+      942 kB: sdcard (pid 176)
+      899 kB: logcat (pid 7797)
+      867 kB: mediaserver (pid 27033)
+      497 kB: /init (pid 1)
+      397 kB: netd (pid 27030)
+      383 kB: wpa_supplicant (pid 25125)
+      372 kB: rild (pid 16550)
+      268 kB: adbd (pid 179)
+      176 kB: drmserver (pid 143)
+      151 kB: gsm0710muxd (pid 16508)
+      148 kB: healthd (pid 124)
+      143 kB: vold (pid 126)
+      142 kB: mtk_agpsd (pid 150)
+      134 kB: installd (pid 147)
+      116 kB: ueventd (pid 88)
+      110 kB: fotabinder (pid 155)
+       93 kB: dhcpcd (pid 12217)
+       83 kB: keystore (pid 149)
+       71 kB: mtkbt (pid 165)
+       53 kB: servicemanager (pid 125)
+       53 kB: nac_server (pid 157)
+       42 kB: debuggerd (pid 133)
+       41 kB: batterywarning (pid 152)
+       34 kB: libestool2.so (pid 30998)
+       31 kB: logwrapper (pid 12216)
+       27 kB: em_svr (pid 177)
+       22 kB: 6620_launcher (pid 140)
+       22 kB: afm_server (pid 167)
+       22 kB: mnld (pid 923)
+       17 kB: drvbd (pid 122)
+       13 kB: thermal (pid 171)
+       13 kB: thermald (pid 172)
+       10 kB: mobile_log_d (pid 134)
+        9 kB: vtservice (pid 146)
+        7 kB: dm_agent_binder (pid 163)
+        6 kB: matv (pid 145)
+        6 kB: MtkCodecService (pid 153)
+        6 kB: ppl_agent (pid 164)
+        6 kB: nvram_agent_binder (pid 169)
+        3 kB: netdiag (pid 136)
+        3 kB: lms (pid 158)
+        3 kB: mdlogger (pid 16507)
+        2 kB: logwrapper (pid 128)
+        2 kB: ccci_mdinit (pid 130)
+        2 kB: ccci_fsd (pid 16504)
+        1 kB: writeconfig (pid 159)
+
+Total PSS by OOM adjustment:
+    12052 kB: Native
+                1853 kB: zygote (pid 27032)
+                1583 kB: logcat (pid 7848)
+                1151 kB: logcat (pid 7796)
+                1017 kB: surfaceflinger (pid 27031)
+                 942 kB: sdcard (pid 176)
+                 899 kB: logcat (pid 7797)
+                 867 kB: mediaserver (pid 27033)
+                 497 kB: /init (pid 1)
+                 397 kB: netd (pid 27030)
+                 383 kB: wpa_supplicant (pid 25125)
+                 372 kB: rild (pid 16550)
+                 268 kB: adbd (pid 179)
+                 176 kB: drmserver (pid 143)
+                 151 kB: gsm0710muxd (pid 16508)
+                 148 kB: healthd (pid 124)
+                 143 kB: vold (pid 126)
+                 142 kB: mtk_agpsd (pid 150)
+                 134 kB: installd (pid 147)
+                 116 kB: ueventd (pid 88)
+                 110 kB: fotabinder (pid 155)
+                  93 kB: dhcpcd (pid 12217)
+                  83 kB: keystore (pid 149)
+                  71 kB: mtkbt (pid 165)
+                  53 kB: servicemanager (pid 125)
+                  53 kB: nac_server (pid 157)
+                  42 kB: debuggerd (pid 133)
+                  41 kB: batterywarning (pid 152)
+                  34 kB: libestool2.so (pid 30998)
+                  31 kB: logwrapper (pid 12216)
+                  27 kB: em_svr (pid 177)
+                  22 kB: 6620_launcher (pid 140)
+                  22 kB: afm_server (pid 167)
+                  22 kB: mnld (pid 923)
+                  17 kB: drvbd (pid 122)
+                  13 kB: thermal (pid 171)
+                  13 kB: thermald (pid 172)
+                  10 kB: mobile_log_d (pid 134)
+                   9 kB: vtservice (pid 146)
+                   7 kB: dm_agent_binder (pid 163)
+                   6 kB: matv (pid 145)
+                   6 kB: MtkCodecService (pid 153)
+                   6 kB: ppl_agent (pid 164)
+                   6 kB: nvram_agent_binder (pid 169)
+                   3 kB: netdiag (pid 136)
+                   3 kB: lms (pid 158)
+                   3 kB: mdlogger (pid 16507)
+                   2 kB: logwrapper (pid 128)
+                   2 kB: ccci_mdinit (pid 130)
+                   2 kB: ccci_fsd (pid 16504)
+                   1 kB: writeconfig (pid 159)
+    43402 kB: System
+               43402 kB: system (pid 27410)
+   139881 kB: Persistent
+               28230 kB: com.lenovo.ideafriend (pid 27858 / activities)
+               22439 kB: com.android.systemui (pid 27533)
+               16327 kB: com.android.incallui (pid 27884 / activities)
+               15512 kB: com.android.phone (pid 27693 / activities)
+               14763 kB: android.process.acore (pid 27872)
+               12007 kB: com.lenovo.wifiswitch (pid 27820)
+               10207 kB: com.android.keyguard (pid 27500)
+                5111 kB: com.lenovo.lightsettings (pid 27794)
+                4556 kB: com.lenovo.widetouch (pid 27806)
+                3881 kB: com.lenovo.weatherserver (pid 27846)
+                3447 kB: com.mediatek.voicecommand (pid 27780)
+                3401 kB: com.lenovo.smartrotation (pid 27832)
+    43150 kB: Foreground
+               43150 kB: android.process.acore (pid 27898 / activities)
+    84128 kB: Visible
+               30270 kB: com.google.android.gms.persistent (pid 27628)
+               17040 kB: com.google.process.gapps (pid 27712)
+               14741 kB: com.android.deskclock (pid 9751)
+               10111 kB: com.lenovo.powercenter (pid 28069 / activities)
+                4300 kB: com.google.process.location (pid 28043)
+                4255 kB: com.lenovo.safecenter.whitelist (pid 28116)
+                3411 kB: vocalizer_e.tts (pid 29034)
+    13333 kB: Perceptible
+               13333 kB: com.google.android.inputmethod.latin (pid 27614)
+    22725 kB: A Services
+               14500 kB: com.viber.voip (pid 6420)
+                8225 kB: com.lenovo.calendar (pid 29922)
+    30996 kB: Previous
+               30996 kB: com.android.settings (pid 8469 / activities)
+     5047 kB: B Services
+                5047 kB: com.nqmobile.avlenovo (pid 21162)
+    79414 kB: Cached
+               41198 kB: com.skype.raider (pid 7904 / activities)
+               17033 kB: com.google.android.gms (pid 9507)
+               11545 kB: com.lenovo.lewea (pid 5121)
+                9638 kB: com.google.android.gms.wearable (pid 9572)
+
+Total PSS by category:
+   231246 kB: Dalvik
+    94430 kB: Unknown
+    69345 kB: Dalvik Other
+    35429 kB: .so mmap
+    23436 kB: .dex mmap
+     7961 kB: .apk mmap
+     5432 kB: Native
+     4236 kB: Stack
+     2179 kB: Other mmap
+      218 kB: Other dev
+      128 kB: Ashmem
+       80 kB: .ttf mmap
+        8 kB: .jar mmap
+        0 kB: Cursor
+        0 kB: code mmap
+        0 kB: image mmap
+        0 kB: Graphics
+        0 kB: GL
+        0 kB: Memtrack
+
+Total RAM: 977288 kB
+ Free RAM: 299150 kB (79414 cached pss + 80876 cached + 138860 free)
+ Used RAM: 448550 kB (394714 used pss + 7256 buffers + 192 shmem + 46388 slab)
+ Lost RAM: 229588 kB
+     ZRAM: 89596 kB physical used for 233460 kB in swap (262140 kB total swap)
+   Tuning: 128 (large 256), oom 122880 kB, restore limit 40960 kB (high-end-gfx)
