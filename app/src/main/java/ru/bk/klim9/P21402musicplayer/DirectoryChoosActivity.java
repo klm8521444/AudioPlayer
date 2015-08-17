@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -19,6 +20,8 @@ import java.util.Date;
 import java.util.List;
 
 public class DirectoryChoosActivity extends ListActivity implements View.OnClickListener{
+
+    final String LOG_TAG = "myLogs";
 
     private List<String> mPathList = null;
     // private String root = "/"; // символ для корневого элемента ТАК РАБОТАЕТ
@@ -161,9 +164,15 @@ public class DirectoryChoosActivity extends ListActivity implements View.OnClick
         mPathTextView1.setText("Массив " + arr);
         */
 
+        /*
         Intent intent = new Intent();
         intent.putExtra("pathsArray", pathsArray);
         setResult(RESULT_OK, intent);
+        */
+        startService(new Intent(this, PlayService.class).putExtra("paths", pathsArray));
+        //Intent intent = new Intent(this, PlaylistActivity.class);
+        //startActivity(intent);
+        Log.d(LOG_TAG, "DirectoryChoosActivity onClick ");
         finish();
 
 

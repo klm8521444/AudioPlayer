@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="Encoding">
-    <file url="file://$PROJECT_DIR$/app/src/main/java/ru/bk/klim9/P21402musicplayer/BaseActivity.java" charset="UTF-8" />
+  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$/app/src/main/java/ru/bk/klim9/P21402musicplayer/PlayService.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/ru/bk/klim9/P21402musicplayer/PlaylistActivity.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/ru/bk/klim9/P21402musicplayer/PlaylistAdapter.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/ru/bk/klim9/P21402musicplayer/Song.java" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

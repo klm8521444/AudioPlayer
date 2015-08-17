@@ -1,14 +1,13 @@
 package ru.bk.klim9.P21402musicplayer;
 
 import android.app.SearchManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.media.MediaPlayer;
-import android.net.Uri;
+import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.MediaStore;
+import android.os.IBinder;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -30,28 +29,41 @@ import java.util.concurrent.TimeUnit;
 public class PlaylistActivity extends BaseActivity implements Runnable, View.OnClickListener,
         SeekBar.OnSeekBarChangeListener, SearchView.OnQueryTextListener {
 
+    final String LOG_TAG = "myLogs";
+
     private RecyclerView recyclerView;
-    private ArrayList<Song> playlist;
-    private ArrayList<Song> filteredPlaylist;
-    public MediaPlayer mediaPlayer;
+    //private ArrayList<Song> playlist;
+    //private ArrayList<Song> filteredPlaylist;
+    //public MediaPlayer mediaPlayer;
     private SeekBar seekbar;
-    private String currentText = "";
-    private Song previousSong;
+    //private String currentText = "";
+    //private Song previousSong;
 
     private Handler durationHandler = new Handler();
     private double timeElapsed = 0, finalTime = 0;
 
 
-    private int position = 0;
-    private int listLength = 0;
+    //private int position = 0;
+    //private int listLength = 0;
 
     TextView songName, author, album, duration, passTime;
 
     int currentPosition = 0;
 
+    ServiceConnection sConn;
+    Intent intent;
+    Intent intentConnect;
+    PlayService myService;
+    boolean bound = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Log.d(LOG_TAG, "PlaylistActivity onCreate 1");
+
+        intentConnect = new Intent(this, PlayService.class);
+        startService(intentConnect);
 
         findViewById(R.id.fb_button).setOnClickListener(this);
         findViewById(R.id.stop_button).setOnClickListener(this);
@@ -77,13 +89,95 @@ public class PlaylistActivity extends BaseActivity implements Runnable, View.OnC
                 false));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
+
+
+        intent = new Intent(this, PlayService.class);
+        sConn = new ServiceConnection() {
+
+            public void onServiceConnected(ComponentName name, IBinder binder) {
+                Log.d(LOG_TAG, "PlaylistActivity onServiceConnected 1");
+                myService = ((PlayService.MyBinder) binder).getService();
+                bound = true;
+                Log.d(LOG_TAG, "PlaylistActivity onServiceConnected 2");
+                createIU();
+                Log.d(LOG_TAG, "PlaylistActivity onServiceConnected 3");
+            }
+
+            public void onServiceDisconnected(ComponentName name) {
+                Log.d(LOG_TAG, "PlaylistActivity onServiceDisconnected");
+                bound = false;
+            }
+        };
+
+        if(!bound){
+            intentConnect = new Intent(this, PlayService.class);
+            startService(intentConnect);
+            bindService(intent, sConn, 0);
+        }
+
+        /*
         playlist = new ArrayList<>();
         filteredPlaylist = new ArrayList<>();
         mediaPlayer = new MediaPlayer();
+        */
+
+
+        Log.d(LOG_TAG, "PlaylistActivity onCreate 2");
 
 
 
     }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d(LOG_TAG, "PlaylistActivity onStart ");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d(LOG_TAG, "PlaylistActivity onRestart ");
+        createIU();
+    }
+
+    public void createIU(){
+        Log.d(LOG_TAG, "PlaylistActivity createIU 1 ");
+        Log.d(LOG_TAG, "PlaylistActivity createIU 2");
+
+        if (PlayService.isInstantiated) {
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            Log.d(LOG_TAG, "PlaylistActivity createIU 3"/* + myService.playlist.get(0).album*/);
+            recyclerView.setAdapter(new PlaylistAdapter(myService.playlist, this));
+        }
+
+        if (myService.mediaPlayer.isPlaying()){
+            setupUI();
+        }
+
+    }
+
+    public void setupUI(){
+        songName.setText(myService.playlist.get(myService.position).title);
+        author.setText(myService.playlist.get(myService.position).artist);
+        album.setText(myService.playlist.get(myService.position).album);
+        int tf = Integer.parseInt(myService.playlist.get(myService.position).duration);
+        duration.setText(String.format("%d min, %d sec", TimeUnit.MILLISECONDS.toMinutes((long) tf), TimeUnit.MILLISECONDS.toSeconds((long) tf) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long) tf))));
+
+        seekbar.setProgress(0);
+        seekbar.setMax(myService.mediaPlayer.getDuration());
+        new Thread(this).start();
+
+        currentPosition = myService.mediaPlayer.getCurrentPosition();
+        durationHandler.postDelayed(updateSeekBarTime, 100);
+        Log.d(LOG_TAG, "PlaylistActivity setupUI");
+    }
+
 
     @Override
     protected int getLayoutResourceIdentifier() {
@@ -127,15 +221,15 @@ public class PlaylistActivity extends BaseActivity implements Runnable, View.OnC
     @Override
     public boolean onQueryTextChange(String newText) {
         if (!newText.isEmpty()) {
-            currentText = newText;
-            filteredPlaylist.clear();
-            for (Song song : playlist)
+            myService.currentText = newText;
+            myService.filteredPlaylist.clear();
+            for (Song song : myService.playlist)
                 if (song.contains(newText))
-                    filteredPlaylist.add(song);
+                    myService.filteredPlaylist.add(song);
 
-            recyclerView.setAdapter(new PlaylistAdapter(filteredPlaylist, this));
+            recyclerView.setAdapter(new PlaylistAdapter(myService.filteredPlaylist, this));
         } else {
-            recyclerView.setAdapter(new PlaylistAdapter(playlist, this));
+            recyclerView.setAdapter(new PlaylistAdapter(myService.playlist, this));
         }
 
         return true;
@@ -154,7 +248,8 @@ public class PlaylistActivity extends BaseActivity implements Runnable, View.OnC
                 startDirectoryChoosActivity();
                 break;
             case R.id.action_all:
-                chooseAllSongs();
+                myService.chooseAllSongs();
+                recyclerView.setAdapter(new PlaylistAdapter(myService.playlist, this));
                 break;
             case R.id.sortTitle:
                 sortTitle();
@@ -179,111 +274,45 @@ public class PlaylistActivity extends BaseActivity implements Runnable, View.OnC
 
     }
 
-    private void chooseAllSongs() {
-        final String selection = MediaStore.Audio.Media.IS_MUSIC + " != 0";
-        final String[] projection = {
-                MediaStore.Audio.Media.DATA,
-                MediaStore.Audio.Media.TITLE,
-                MediaStore.Audio.Media.ARTIST,
-                MediaStore.Audio.Media.ALBUM,
-                MediaStore.Audio.Media.DURATION
-        };
-        final String sortOrder = MediaStore.Audio.AudioColumns.TITLE + " COLLATE LOCALIZED ASC";
-
-        Cursor cursor = null;
-        try {
-            Uri uri = android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
-            cursor = getContentResolver().query(uri, projection, selection, null, sortOrder);
-            if (cursor != null) {
-                cursor.moveToFirst();
-                playlist.clear();
-                while (!cursor.isAfterLast()) {
-                    final String path = cursor.getString(0);
-                    final String title = cursor.getString(1);
-                    final String artist = cursor.getString(2);
-                    final String album = cursor.getString(3);
-                    final String duration = cursor.getString(4);
-                    playlist.add(new Song(path, title, artist, album, duration));
-
-                    cursor.moveToNext();
-                }
-                recyclerView.setAdapter(new PlaylistAdapter(playlist, this));
-            }
-        } catch (Exception e) {
-            Log.e("MusicPlayer", e.toString());
-            e.printStackTrace();
-        } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
-        }
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (data == null) {
-            return;
-        }
-        String[] filteredPaths = data.getStringArrayExtra("pathsArray");
-        listLength = listLength + filteredPaths.length;
-        playlist.clear();
-        for (int i = 0; i < filteredPaths.length; i++) {
-            playlist.add(new Song(filteredPaths[i]));
-        }
-        recyclerView.setAdapter(new PlaylistAdapter(playlist, this));
+
     }
+
+
+
 
 
     private void onStopClick() {
-        mediaPlayer.stop();
+        myService.mediaPlayer.stop();
         setActiveSongIconPlaying(false);
+
     }
 
     private void onPauseClick() {
-        mediaPlayer.pause();
+        myService.mediaPlayer.pause();
         setActiveSongIconPlaying(false);
     }
 
     private void onPlayClick() {
-        mediaPlayer.start();
+        myService.mediaPlayer.start();
         setActiveSongIconPlaying(true);
     }
 
     private void onRestartClick() throws IOException {
-        final ArrayList<Song> songList = currentText.isEmpty() ?
-                playlist : filteredPlaylist;
-        final Song song = songList.get(position);
-        if (previousSong != null)
-            previousSong.setIsPlaying(false);
-        previousSong = song;
-        song.setIsPlaying(true);
+        Log.d(LOG_TAG, "PlaylistActivity onRestartClick 1");
+        myService.onRestartServiceData();
 
-        mediaPlayer.stop();
-        mediaPlayer = new MediaPlayer();
-        mediaPlayer.setDataSource(song.path);
-        mediaPlayer.prepare();
-        mediaPlayer.start();
+        recyclerView.setAdapter(new PlaylistAdapter(myService.songList, this));
 
-        recyclerView.setAdapter(new PlaylistAdapter(songList, this));
+        setupUI();
 
-        songName.setText(playlist.get(position).title);
-        author.setText(playlist.get(position).artist);
-        album.setText(playlist.get(position).album);
-        int tf = Integer.parseInt(playlist.get(position).duration);
-        duration.setText(String.format("%d min, %d sec", TimeUnit.MILLISECONDS.toMinutes((long) tf), TimeUnit.MILLISECONDS.toSeconds((long) tf) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long) tf))));
-
-        seekbar.setProgress(0);
-        seekbar.setMax(mediaPlayer.getDuration());
-        new Thread(this).start();
-
-        currentPosition = mediaPlayer.getCurrentPosition();
-        durationHandler.postDelayed(updateSeekBarTime, 100);
     }
 
     private void setActiveSongIconPlaying(boolean isPlaying) {
-        final ArrayList<Song> songList = currentText.isEmpty() ?
-                playlist : filteredPlaylist;
-        previousSong.setIsPlaying(isPlaying);
+        final ArrayList<Song> songList = myService.currentText.isEmpty() ?
+                myService.playlist : myService.filteredPlaylist;
+        myService.previousSong.setIsPlaying(isPlaying);
         recyclerView.setAdapter(new PlaylistAdapter(songList, this));
     }
 
@@ -292,18 +321,20 @@ public class PlaylistActivity extends BaseActivity implements Runnable, View.OnC
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.song_container:
-                position = recyclerView.getChildLayoutPosition(v);
+                Log.d(LOG_TAG, "PlaylistActivity onClick song_container 1");
+                myService.position = recyclerView.getChildLayoutPosition(v);
                 try {
                     onRestartClick();
 
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                Log.d(LOG_TAG, "PlaylistActivity onClick song_container 2");
                 break;
             case R.id.fb_button:
                 try {
-                    if (position > 0) {
-                        position = position - 1;
+                    if (myService.position > 0) {
+                        myService.position = myService.position - 1;
                     }
                     onRestartClick();
 
@@ -313,9 +344,10 @@ public class PlaylistActivity extends BaseActivity implements Runnable, View.OnC
                 break;
             case R.id.stop_button:
                 onStopClick();
+
                 break;
             case R.id.play_button:
-                if (mediaPlayer.isPlaying()) {
+                if (myService.mediaPlayer.isPlaying()) {
                     onPauseClick();
                 } else {
                     onPlayClick();
@@ -323,8 +355,8 @@ public class PlaylistActivity extends BaseActivity implements Runnable, View.OnC
                 break;
             case R.id.ff_button:
                 try {
-                    if (position < listLength - 1) {
-                        position = position + 1;
+                    if (myService.position < myService.listLength - 1) {
+                        myService.position = myService.position + 1;
                     }
                     onRestartClick();
 
@@ -339,7 +371,7 @@ public class PlaylistActivity extends BaseActivity implements Runnable, View.OnC
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress,
                                   boolean fromUser) {
-        if (fromUser) mediaPlayer.seekTo(progress);
+        if (fromUser) myService.mediaPlayer.seekTo(progress);
 
     }
 
@@ -356,11 +388,11 @@ public class PlaylistActivity extends BaseActivity implements Runnable, View.OnC
     @Override
     public void run() {
         //int currentPosition = 0;
-        int total = mediaPlayer.getDuration();
-        while (mediaPlayer != null && currentPosition < total) {
+        int total = myService.mediaPlayer.getDuration();
+        while (myService.mediaPlayer != null && currentPosition < total) {
             try {
                 Thread.sleep(1000);
-                currentPosition = mediaPlayer.getCurrentPosition();
+                currentPosition = myService.mediaPlayer.getCurrentPosition();
 
             } catch (InterruptedException e) {
                 return;
@@ -377,7 +409,7 @@ public class PlaylistActivity extends BaseActivity implements Runnable, View.OnC
     private Runnable updateSeekBarTime = new Runnable() {
         public void run() {
             //get current position
-            timeElapsed = mediaPlayer.getCurrentPosition();
+            timeElapsed = myService.mediaPlayer.getCurrentPosition();
             //set seekbar progress
             seekbar.setProgress((int) timeElapsed);
 
@@ -400,8 +432,8 @@ public class PlaylistActivity extends BaseActivity implements Runnable, View.OnC
     public void sortTime() {
 
 
-        Collections.sort(playlist, durationComparator);
-        recyclerView.setAdapter(new PlaylistAdapter(playlist, this));
+        Collections.sort(myService.playlist, durationComparator);
+        recyclerView.setAdapter(new PlaylistAdapter(myService.playlist, this));
 
     }
 
@@ -415,8 +447,8 @@ public class PlaylistActivity extends BaseActivity implements Runnable, View.OnC
     public void sortTitle() {
 
 
-        Collections.sort(playlist, titleComparator);
-        recyclerView.setAdapter(new PlaylistAdapter(playlist, this));
+        Collections.sort(myService.playlist, titleComparator);
+        recyclerView.setAdapter(new PlaylistAdapter(myService.playlist, this));
 
     }
 
@@ -430,8 +462,8 @@ public class PlaylistActivity extends BaseActivity implements Runnable, View.OnC
     public void sortArtist() {
 
 
-        Collections.sort(playlist, artistComparator);
-        recyclerView.setAdapter(new PlaylistAdapter(playlist, this));
+        Collections.sort(myService.playlist, artistComparator);
+        recyclerView.setAdapter(new PlaylistAdapter(myService.playlist, this));
 
     }
 
@@ -445,20 +477,15 @@ public class PlaylistActivity extends BaseActivity implements Runnable, View.OnC
     public void sortAlbum() {
 
 
-        Collections.sort(playlist, albumComparator);
-        recyclerView.setAdapter(new PlaylistAdapter(playlist, this));
+        Collections.sort(myService.playlist, albumComparator);
+        recyclerView.setAdapter(new PlaylistAdapter(myService.playlist, this));
 
     }
 
-    /*
+
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        currentText = savedInstanceState.getString("currentText");
-        timeElapsed = savedInstanceState.getDouble("timeElapsed");
-        finalTime = savedInstanceState.getDouble("finalTime");
-        position = savedInstanceState.getInt("position");
-        listLength = savedInstanceState.getInt("listLength");
-        currentPosition = savedInstanceState.getInt("currentPosition");
+
 
     }
 
@@ -466,66 +493,15 @@ public class PlaylistActivity extends BaseActivity implements Runnable, View.OnC
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        outState.putString("currentText", currentText);
-        outState.putDouble("timeElapsed", timeElapsed);
-        outState.putDouble("finalTime", finalTime);
-        outState.putInt("position", position);
-        outState.putInt("listLength", listLength);
-        outState.putInt("currentPosition", currentPosition);
+
 
     }
-    */
-
-    /*
-    @Override
-    public Object onRetainCustomNonConfigurationInstance() {
-        return seekbar;
-    }
-    */
-
-
-    /*
-     private RecyclerView recyclerView;
-    private ArrayList<Song> playlist;
-    private ArrayList<Song> filteredPlaylist;
-    private MediaPlayer mediaPlayer;
-    private SeekBar seekbar;
-    private String currentText = "";
-    private Song previousSong;
-
-    private Handler durationHandler = new Handler();
-    private double timeElapsed = 0, finalTime = 0;
-
-
-    private int position = 0;
-    private int listLength = 0;
-
-    TextView songName, author, album, duration, passTime;
-
-    int currentPosition = 0;
-
-     */
-
-
-   /*
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        mediaPlayer = (MediaPlayer) getLastNonConfigurationInstance();
-    }
-
-    public Object onRetainNonConfigurationInstance(MediaPlayer mediaPlayer) {
-        return mediaPlayer;
-    }
-    */
-
-
 
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mediaPlayer.stop();
+
     }
 
 
